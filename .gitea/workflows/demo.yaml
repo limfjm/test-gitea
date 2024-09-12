@@ -1,0 +1,83 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      boolean_default_true:
+        description: 'Test scenario tags'
+        required: true
+        type: boolean
+        default: true
+      boolean_default_false:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+        default: false
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+        default: 'environment values'
+      number_required_1:
+        description: 'number '
+        type: number
+        required: true
+        default: '100'
+      number_required_2:
+        description: 'number'
+        type: number
+        required: true
+        default: '100'
+      number_required_3:
+        description: 'number'
+        type: number
+        required: true
+        default: '100'
+      number_1:
+        description: 'number'
+        type: number
+        required: false
+      number_2:
+        description: 'number'
+        type: number
+        required: false
+      number_3:
+        description: 'number'
+        type: number
+        required: false
+
+env:
+  inputs_logLevel:              ${{ inputs.logLevel }}
+  inputs_tags:                  ${{ inputs.tags }}
+  inputs_boolean_default_true:  ${{ inputs.boolean_default_true }}
+  inputs_boolean_default_false: ${{ inputs.boolean_default_false }}
+  inputs_environment:           ${{ inputs.environment }}
+  inputs_number_1:              ${{ inputs.number_1  }}
+  inputs_number_2:              ${{ inputs.number_2  }}
+  inputs_number_3:              ${{ inputs.number_3  }}
+  inputs_number_required_1:     ${{ inputs.number_required_1  }}
+  inputs_number_required_2:     ${{ inputs.number_required_2  }}
+  inputs_number_required_3:     ${{ inputs.number_required_3  }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ls -la
+      - run: env | grep inputs
+      - run: echo ${{ inputs.logLevel }}
+      - run: echo ${{ inputs.boolean_default_false }}
