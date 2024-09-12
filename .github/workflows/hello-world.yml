@@ -1,0 +1,10 @@
+name: Hello World
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello World using single command
+        run: echo  Successful Hello World using GitHub Actions on single command!
